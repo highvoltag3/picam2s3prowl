@@ -1,0 +1,33 @@
+{
+  "name": "picam_s3_prowl",
+  "version": "1.0.0",
+  "description": "Script to Upload motion generated pictures and videos to S3 and send Push notifications to the user throw Prowl (iOS)",
+  "main": "index.js",
+  "dependencies": {
+    "aws-cli": "0.0.1",
+    "aws-sdk": "^2.1.50",
+    "node-prowl": "^0.1.7"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/highvoltag3/picam2s3prowl.git"
+  },
+  "keywords": [
+    "s3",
+    "prowl",
+    "nodejs",
+    "motion",
+    "raspberrypi",
+    "cam"
+  ],
+  "author": "Dario J Novoa V",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/highvoltag3/picam2s3prowl/issues"
+  },
+  "homepage": "https://github.com/highvoltag3/picam2s3prowl#readme"
+}
