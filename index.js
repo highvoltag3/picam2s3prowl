@@ -4,15 +4,9 @@ var fs = require('fs');
 var Prowl = require('node-prowl');
 var prowl = new Prowl('ce7e8d2a72cd6ebac51636de2e521a688c8d1a21');
 
-//AWS.config.loadFromPath('./config.json');
+exports.handler = function(event) {
+  console.log('Received event:', JSON.stringify(event, null, 2));
 
-//process.argv.forEach(function (val, index, array) {
-//  console.log(index + ': ' + val);
-//});
-
-exports.handler = function(event, context, callback) {
-   console.log('Received event:', JSON.stringify(event, null, 2));
-	//KEY = filename
 	var filepath = process.argv[2];
 	var filename = filepath.replace("/mnt/camshare/Cam1/", "");
 	var body = fs.createReadStream(filepath);
@@ -46,9 +40,9 @@ exports.handler = function(event, context, callback) {
 	}
 
 	s3obj.upload({Body: body}).
-  on('httpUploadProgress', function(evt) { 
-  console.log(evt); 
-  fs.appendFile('/tmp/motion.log', JSON.stringify(evt), function (err){
+	on('httpUploadProgress', function(evt) { 
+		console.log(evt); 
+		fs.appendFile('/tmp/motion.log', JSON.stringify(evt), function (err){
 		console.log(err);
 		
 		});
