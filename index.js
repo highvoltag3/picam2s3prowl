@@ -1,12 +1,13 @@
 #!/usr/bin/env node
 
 var AWS = require('aws-sdk'); 
-AWS.config.loadFromPath('./config.json'); // get credentials
+var appPath = "/opt/picam_s3_and_prowl/"; //path to the folder containing index.js
+AWS.config.loadFromPath(appPath + 'config.json'); // get credentials
 var s3 = new AWS.S3();
 var fs = require('fs');
 var Prowl = require('node-prowl');
-var ProwlKey = require('./prowlKey.js');
-var prowl = new Prowl(ProwlKey());
+var prowlKey = require(appPath + 'prowlKey.js');
+var prowl = new Prowl(prowlKey);
 var cmd = require('node-cmd');
 
 exports.handler = function(event) {
