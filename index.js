@@ -69,7 +69,7 @@ exports.handler = function(event) {
 			);
 			//sendPushNotification(data);
 			//We've uploaded the video so lets delete it now, we don't need it in S3 and locally
-    			cmd.run('rm -f' + filepath);
+    			cmd.run('rm -f ' + filepath);
   		} else {
 			fs.appendFile('/tmp/motion_msgs.log', 'Error while sending data: ' + err + "\n" + JSON.stringify(data), function (err) {
                        		console.log(err);
