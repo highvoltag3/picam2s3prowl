@@ -54,16 +54,20 @@ exports.handler = function(event) {
   	})
   	.send(function(err, data) { 
   		if(!err){
-//			cmd.get(
-//				'nmap -p 62078 192.168.0.2-254 | grep \'62078/tcp open\' | wc -l',
-//				function(data) {
-//					console.log("nmap results for '62078/tcp..' A.K.A is there an iphone in the house " + data);
-//       				if(data > 0) {
-//						sendPushNotification(data);
-//					}	
-//				}
-//			);
-			sendPushNotification(data);
+			cmd.get(
+				'hcitool name DC:2B:2A:34:CA:BF', //use the mac address of your phone, you will need to pair it and trust it first see: http://askubuntu.com/questions/294736/run-a-shell-script-as-another-user-that-has-no-password
+				function(cmdData) {
+					console.log(cmdData);
+					//if the text returned by the command has a length that means the phone is within range so we wont send a notification
+       					if(!cmdData.length > 0) {
+						sendPushNotification(data);
+					}	
+					fs.appendFile('/tmp/motion_msgs.log', "Results from hcitool: " + cmdData, function (err){
+                                                console.log(err);
+                                        });
+				}
+			);
+			//sendPushNotification(data);
 			//We've uploaded the video so lets delete it now, we don't need it in S3 and locally
     			cmd.run('rm -f' + filepath);
   		} else {
